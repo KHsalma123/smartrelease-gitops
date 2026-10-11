@@ -24,7 +24,7 @@ spec:
             - containerPort: 8000
           env:
             - name: APP_VERSION
-              value: "v1-canary-test"
+              value: v2
             - name: APP_STATUS
               value: "healthy"
           readinessProbe:

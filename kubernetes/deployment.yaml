@@ -12,10 +12,12 @@ spec:
       labels:
         app: smartrelease
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       containers:
         - name: smartrelease
-          image: smartrelease-app:v1
-          imagePullPolicy: Never
+          image: ghcr.io/khsalma123/smartrelease-app:sha-bf9375c
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           env:

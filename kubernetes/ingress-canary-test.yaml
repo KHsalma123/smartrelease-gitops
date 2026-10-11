@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: smartrelease-canary-test-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: smartrelease.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: smartrelease-canary-test-stable-service
+                port:
+                  number: 8000

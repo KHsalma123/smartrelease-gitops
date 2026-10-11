@@ -47,8 +47,14 @@ spec:
               cpu: 500m
               memory: 256Mi
 
+
   strategy:
     canary:
+      stableService: smartrelease-canary-test-stable-service
+      canaryService: smartrelease-canary-test-service
+      trafficRouting:
+        nginx:
+          stableIngress: smartrelease-canary-test-ingress
       steps:
         - setWeight: 20
         - pause: {}

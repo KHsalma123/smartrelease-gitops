@@ -22,7 +22,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: smartrelease
-          image: ghcr.io/khsalma123/smartrelease-app:metrics-80ae579
+          image: ghcr.io/khsalma123/smartrelease-app:error-test
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000

@@ -193,6 +193,34 @@ kubectl get analysistemplate,analysisrun
 
 These commands help verify cluster readiness, GitOps synchronization, rollout health, traffic-routing resources, and analysis execution.
 
+### Failure and Rollback Validation Lab
+
+A separate Rollout named `smartrelease-failure-lab` was used to
+validate failure detection and rollback behavior in the
+`smartrelease-lab` namespace. This lab is managed independently
+from the main Argo CD application.
+
+The validation included:
+
+- Verifying that the application `/metrics` endpoint returns HTTP 200.
+- Confirming that Prometheus successfully scrapes the lab workloads.
+- Triggering a failed analysis using a dedicated failure-test
+  AnalysisTemplate.
+- Confirming that the failed candidate revision is scaled down.
+- Restoring the stable application image:
+  `ghcr.io/khsalma123/smartrelease-app:metrics-80ae579`.
+- Verifying that the final Rollout is Healthy with 2/2 replicas ready.
+
+Useful inspection commands:
+
+```bash
+kubectl argo rollouts get rollout smartrelease-failure-lab -n smartrelease-lab
+kubectl get pods -n smartrelease-lab
+kubectl get analysistemplate -n smartrelease-lab
+```
+
+The forced-failure AnalysisTemplate is intended for demonstration and testing; it is not the normal production success-rate analysis.
+
 ## Related Repository
 
 The application code and container build configuration are maintained in a separate repository:
